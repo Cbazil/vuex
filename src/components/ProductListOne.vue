@@ -7,11 +7,13 @@
             <span class="price">${{ product.price }}</span>
         </li>
       </ul>
-      <button v-on:click="reducePrice()">Reduce Price</button>
+      <button v-on:click="reducePrice(4)">Reduce Price</button>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   computed: {
@@ -31,9 +33,14 @@ export default {
     // }
 
     // Getting Getter
-    saleProducts(){
-      return this.$store.getters.saleProducts;
-    }
+    // saleProducts(){
+    //   return this.$store.getters.saleProducts;
+    // }
+
+    ...mapGetters([
+      'saleProducts'
+    ])
+
   },
   methods: {
     // reducePrice() {
@@ -41,14 +48,18 @@ export default {
     //     product.price -= 1;
     //   })
     // }
-    reducePrice(amount) {
+    // reducePrice(amount) {
       // DIRECT MUTATION ->
       // this.$store.commit('reducePrice');
       
       // Calling action, where action exercutes mutation
-      this.$store.dispatch('reducePrice', amount);
+    //   this.$store.dispatch('reducePrice', amount);
 
-    }
+    // }
+
+    ...mapActions([
+      'reducePrice'
+    ])
   }
 }
 </script>
